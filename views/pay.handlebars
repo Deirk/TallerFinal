@@ -1,0 +1,98 @@
+<article class="cont__pay">
+    <h2 class="cont__pay">CHECKOUT</h2>
+
+    <article class="pay">
+
+        <form class="pay__forms" action="/checkout" method="POST">
+
+            <h2 class="pay__forms">Contact information</h2>
+
+            <input class="fomrs__item" name="email" type="text" placeholder="Email">
+
+            <input class="fomrs__item" name="phone" type="text" placeholder="Phone Number">
+
+            <h2 class="pay__forms">Delivery information</h2>
+
+            <div class="forms__selector">
+
+                <input class="fomrs__item" name="firsName" type="text" placeholder="First Name">
+
+                <input class="fomrs__item" name="lastName" type="text" placeholder="Last Name">
+
+            </div>
+
+            <input class="fomrs__item" name="address" type="text" placeholder="Address">
+
+            <input class="fomrs__item" name="country" type="text" placeholder="Country">
+
+            <div class="forms__horizontal">
+
+                <select name="state" class="forms__item">
+                    <option value="" disabled selected>State</option>
+                    <option value="California">California</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Texas">Texas</option>
+                    <option value="Washington">Washington</option>
+                </select>
+
+
+                <input class="forms__item" name="city" type="text" placeholder="City">
+
+                <input class="forms__item" name="zip" type="text" placeholder="Zip Code">
+
+            </div>
+
+            <h2 class="pay__forms">Payment</h2>
+
+            <input class="forms__item" name="card" type="text" placeholder="Card Number">
+
+            <h2 class="pay__forms">Expiration Date</h2>
+
+            <div class="forms__horizontal">
+
+                <select name="year" class="forms__item ">
+                    <option value="" disabled selected>Year</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                </select>
+
+                <select name="month" class="forms__item">
+                    <option value="" disabled selected>Month</option>
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="Mar">Mar</option>
+                    <option value="Apr">Apr</option>
+                    <option value="May">May</option>
+                    <option value="Jun">Jun</option>
+                    <option value="Jul">Jul</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sep">Sep</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+                </select>
+
+                <input class="forms__item" name="cvv" type="text" placeholder="CVV">
+
+            </div>
+
+
+            <input type="hidden" name="products" class="forms__productos">
+            <input type="hidden" name="total" class="forms__total">
+
+            <button type="submit" class="forms__btn">BUY NOW</button>
+
+        </form>
+
+
+
+           <h2 class="car__tittle">SUMMARY</h2>
+                   
+            <p class="abstract__can"> PRODUCTS {{cartSize}}</p>
+            <p class="abstract__total">Total $ {{total}}</p>
+
+
+    </article>
+</article>

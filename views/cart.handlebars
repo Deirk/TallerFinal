@@ -1,0 +1,70 @@
+<article class="car">
+    <h1 class="indivi__header">MY BAG </h1>
+
+    <article class="carrito">
+
+        <div class="cart__list">
+            {{#each products}}
+           
+                    
+            <a href="/store/{{this.name}}" class="cart">
+                <!-- Detalles del producto -->
+
+                {{!-- Imagen del producto --}}
+                <section class="cart__image">
+                    <img src="/images/{{this.images.[0]}}">
+                </section>
+
+                {{!-- Informacion del producto  --}}
+                <section class="cart__content">
+
+                    <article class="top__right">
+                        <h1 class="cart__header"> {{this.name}}</h1>
+                        <h2 class="cart__header"> {{this.category}}</h2>
+                        <h1 class="cart__header">{{this.price}}</h1>
+                       
+                    </article>
+
+
+                </section>
+
+            
+
+             </a>
+                    <div class="cart__buttons">
+                    
+                        <a class="buttons__less" data-name="{{this._id}}" href="">
+                            <img src="/images/minus.png" alt="">
+                        </a>
+                         <h1 class="cart__quantity"> {{this.cantidad}}</h1>
+
+                        <a class="buttons__more" data-name="{{this._id}}" href="">
+                            <img src="/images/plus.png" alt="">
+                        </a>
+                       
+                        <a class="buttons__delete" data-name="{{this._id}}" href="">
+                            <img src="/images/remove.png" alt="">
+                        </a>
+
+                    </div>
+               
+
+        </div>
+
+        {{/each}}
+
+        </div>
+         <h2 class="car__tittle">SUMMARY</h2>
+                   
+            <p class="abstract__can"> PRODUCTS {{cartSize}}</p>
+            <p class="abstract__total">Total $ {{total}}</p>
+        <button class="abstract__btn" onclick="location.href='pay/';">BUY NOW</button>
+
+    </article>
+</article>
+
+</div>
+
+<script src="/scrips/cartMore.js"></script>
+<script src="/scrips/cartLess.js"></script>
+<script src="/scrips/cartDelete.js"></script>

@@ -1,0 +1,66 @@
+<section class="indivi">
+
+  <h1 class="indivi__header"> {{individual.name}}</h1>
+
+  <section class="indivi__container">
+    <section class="indivi__right">
+
+      <div class="indivi__image">
+        <img src="/images/{{individual.images.[0]}}">
+      </div>
+
+
+      <article class="indivi__gallery">
+
+        <div class="gallery__mini">
+          <img src="/images/{{individual.images.[1]}}">
+        </div>
+        <div class="gallery__mini">
+          <img src="/images/{{individual.images.[2]}}">
+        </div>
+        <div class="gallery__mini">
+          <img src="/images/{{individual.images.[3]}}">
+        </div>
+        <div class="gallery__mini">
+          <img src="/images/{{individual.images.[4]}}">
+        </div>
+        {{!-- <div class="gallery__mini" style=" background-image: url(/imagenes/{{imagenes.[2]}})"></div> --}}
+      </article>
+
+      <div class="gallery__photos">
+
+
+      </div>
+
+    </section>
+    <!-- Detalles del producto -->
+
+    <section class="indivi__left">
+      <article class="left__top top">
+        <h1 class="top__indivi">${{individual.price}}</h1>
+      </article>
+      <article class="left__info ">
+        <p class="info__indivi">{{individual.characteristic}} </p>
+        <ul class="left__list"></ul>
+        <li class="info__indivi">{{individual.characOne}} </li>
+        <li class="info__indivi">{{individual.characTwo}}
+        </li>
+        <li class="info__indivi">{{individual.characThree}}
+        </li>
+      </article>
+
+    </section>
+
+  </section>
+
+
+
+</section>
+
+
+<a class="product__bag" data-name="{{individual._id}}" href="#">
+      <p>Buy!</p>
+  </a>
+
+
+<script src="/scrips/addCartInd.js"></script>

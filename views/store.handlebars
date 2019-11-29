@@ -1,0 +1,88 @@
+<section class="store">
+
+    <section class="store__top">
+        <h1 class="indivi__header">Buy Now</h1>
+
+        {{!-- //----------------------SECCION DE BOTONES------------------------------// --}}
+        <article class="indivi__btns">
+            <button class="header__filter">
+                <img src="/images/filter.png" alt=""></a>
+            </button> <button class="header__sort">
+                <img src="/images/sort.png" alt=""></a>
+            </button>
+        </article>
+    </section>
+    {{!-- //----------------------SECCION DE FILTRO------------------------------// --}}
+    <section class="store__filter">
+        <h1>Filter by:</h1>
+        <article class="filters__type">
+            <h2>Type:</h2>
+            <a href="/store/type/Jordan" class="filter__list">JORDAN</a>
+            <a href="/store/type/Skate" class="filter__list">SKATE</a>
+            <a href="/store/type/Basketball" class="filter__list">BASKETBALL</a>
+        </article>
+        <h2>Colors:</h2>
+        <article class="filters__colors">
+
+            <a href="/store/colors/Black">
+                <div class="filters__item" style=" background-color: rgb(5, 5, 5)"></div>
+            </a>
+            <a href="/store/colors/White">
+                <div class="filters__item" style=" background-color: #E8E8E8"></div>
+            </a>
+            <a href="/store/colors/Marron">
+                <div class="filters__item" style=" background-color: rgb(163, 33, 10)"></div>
+            </a>
+            <a href="/store/colors/Blue">
+                <div class="filters__item" style=" background-color: #053cc5"></div>
+            </a>
+            <a href="/store/colors/Green">
+                <div class="filters__item" style=" background-color: rgb(45, 167, 56)"></div>
+            </a>
+            <a href="/store/colors/Starfish">
+                <div class="filters__item" style=" background-color: rgb(230, 126, 28)"></div>
+            </a>
+        </article>
+    </section>
+    {{!-- //----------------------SECCION DE ORDENAR------------------------------// --}}
+    <section class="store__sort">
+        <h2>Price:</h2>
+        <a href="/store/sort/priceH" class="filter__list"> Hight-Low</a>
+        <h2>Price:</h2>
+        <a href="/store/sort/priceL" class="filter__list"> Low-Hight</a>
+        <h2>Size:</h2>
+        <a href="/store/sort/size" class="filter__list">SIZE</a>
+    </section>
+
+
+    <section class="store__all">
+        {{!-- //----------------------SECCION DE PRODUCTOS------------------------------// --}}
+        {{#each productsList}}
+        <div class="product__individual">
+            <a href="/store/{{this.name}}" class="product">
+                <!-- Detalles del producto -->
+
+                {{!-- Imagen del producto --}}
+                <section class="product__image">
+                    <img src="/images/{{this.images.[0]}}">
+                </section>
+
+                {{!-- Informacion del producto  --}}
+                <section class="product__top">
+
+                    <article class="top__right">
+                        <h2 class="product__header"> {{this.name}}</h1>
+                        <h1 class="product__text"> {{this.category}}</h2>
+                        <h1 class="product__text">{{this.price}}</h1>
+                    </article>
+
+                </section>
+            </a>
+               <a class="store__bag" data-name="{{this._id}}" href="">
+            <p>Buy!</p>
+        </a>
+    </div>
+
+    {{/each}}
+    </section>
+</section>

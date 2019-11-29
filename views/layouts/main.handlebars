@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nike by MJAB</title>
+
+    <!-- Link de la tipografia -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <!-- Link del css -->
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <!-- Inicio el header -->
+    <header class="header">
+        <!-- Elementos del header -->
+
+        <!-- Logo -->
+        <!-- Navegacion Principal -->
+        <a href="#"> <img class="header__logo" src="/images/lgo_header.png" alt=""></a>
+
+        <nav class="header__list listnav">
+            <a href="/#banner" class="listnav__a">NEW RELEASES</a>
+            <a href="/store" class="listnav__a">SHOP</a>
+            <a href="/#presentation" class="listnav__a">KNOW</a>
+            <a href="/#characteristic" class="listnav__a">FOR YOU</a>
+            <a href="/#gallery" class="listnav__a">GALLERY</a>
+        </nav>
+
+        <a class="header__btn" href="/shopping">
+            <img src="/images/tienda.png" alt=""></a>
+        </a>
+        <a class="header__bag" href="/shopping">
+            <h2>{{cartSize}}</h2>
+        </a>
+
+
+
+
+        <!-- Responsive -->
+        <button class="header__responsive">
+            <img src="images/menu.png" alt="">
+        </button>
+    </header>
+    {{!-- Navegacion contextual --}}
+    <section class="contextual">
+        <a href="/store/category/Men's Shoe" class="contextual__list">MEN</a>
+        <a href="/store/category/Women's Shoe" class="contextual__list">WOMAN</a>
+        <a href="/store/category/Kid's Shoe" class="contextual__list">KID</a>
+
+    </section>
+
+
+    {{{body}}}
+
+    <!-- seccion footer -->
+    <footer class="footer">
+        <a href="#banner" class="footer__list">NEW RELEASES</a>
+        <a href="#advertising" class="footer__list">SHOP</a>
+        <a href="#presentation" class="footer__list">KNOW</a>
+        <a href="#"> <img class="footer__logo" src="/images/lgo_header.png" alt=""></a>
+        <a href="https://www.nike.com/us/retail/?page=1&storesPerPage=15" class="footer__list">FIND A STORE</a>
+        <a href="https://www.nike.com/help" class="footer__list"> GET HELP</a>
+        <a href="https://about.nike.com" class="footer__list">ABOUT NIKE</a>
+
+    </footer>
+
+    <script src="/scrips/javaHome.js"></script>
+    <script src="/scrips/javaCart.js"></script>
+    <script src="/scrips/javaStore.js"></script>
+    <script src="/scrips/addcart.js"></script>
+
+
+</body>
+
+</html>
