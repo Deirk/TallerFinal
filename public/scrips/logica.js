@@ -179,12 +179,12 @@ class Logica {
         for (let i = 0; i < this.obstacles.length; i++) {
             const o = this.obstacles[i];
             if (o.tipo == 1) {
-                if (this.app.dist(180, this.posY + 35, o.posX, o.posY) < 38) {
+                if (this.app.dist(150, this.posY + 50, o.posX+100, o.posY) < 50) {
                     this.reset();
                 }
             }
             if (o.tipo == 3) {
-                if (this.app.dist(100, this.posY + 35, o.posX, o.posY) < 38) {
+                if (this.app.dist(100, this.posY + 40, o.posX, o.posY) < 38) {
                     this.reset();
                 }
             }
@@ -209,7 +209,7 @@ class Logica {
                 this.update = this.update.bind(this);
                 this.upd = setInterval(this.update, 20);
                 this.animation = this.animation.bind(this);
-                this.anim = setInterval(this.animation, 80);
+                this.anim = setInterval(this.animation, 50);
                 this.generateObstacle = this.generateObstacle.bind(this);
                 this.generate = setInterval(this.generateObstacle, 3000);
                 break;
