@@ -1,6 +1,7 @@
 class Logica {
 
     static obstacle1;
+    static obstacle2;
 
     constructor(app) {
         this.app = app;
@@ -32,6 +33,8 @@ class Logica {
     preload() {
         this.background = this.app.loadImage('/images/fondo.jpg');
         Logica.obstacle1 = this.app.loadImage('/images/objeto1.png');
+        Logica.obstacle2 = this.app.loadImage('/images/objeto2.png');
+
 
         for (let i = 1; i < 11; i++) {
             this.runing.push(this.app.loadImage('/images/correr' + i + '.png'))
@@ -74,7 +77,7 @@ class Logica {
                 this.isJumping = true;
                 this.isRunnig = false;
                 this.rIndex = 0;
-                this.velJumping = -8;
+                this.velJumping = -9;
             }
             if (this.app.key == 'A' || this.app.key == 'a') {
                 this.isHJumping = true;

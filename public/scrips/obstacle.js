@@ -6,11 +6,20 @@ class Obstacle {
         this.posY = 450;
         this.vel = 7;
         this.update = this.update.bind(this);
+        this.tipo = Math.floor(app.random(1, 3));
         this.upd = setInterval(this.update, 20);
     }
 
     draw() {
-        this.app.image(Logica.obstacle1, this.posX, this.posY);
+        switch (this.tipo) {
+            case 1:
+                this.app.image(Logica.obstacle1, this.posX, this.posY);
+                break;
+            case 2:
+                this.app.image(Logica.obstacle2, this.posX, this.posY);
+                break;
+        }
+
     }
 
     update() {
