@@ -1,11 +1,13 @@
 class Logica {
 
+    static obstacle1;
+
     constructor(app) {
         this.app = app;
         this.screenNumber = 0;
         this.mapX = 2592.5;
         this.mapX2 = 2592.5 + 5185;
-        this.velMap = 5;
+        this.velMap = 7;
         this.rIndex = 0;
         this.posY = 400;
         this.gravity = 0.5;
@@ -14,6 +16,7 @@ class Logica {
         this.kicking = [];
         this.jumping = [];
         this.hJumping = [];
+        this.obstacles = [];
         this.isRunnig = true;
         this.isJumping = false;
         this.isHJumping = false;
@@ -22,10 +25,14 @@ class Logica {
         this.upd = setInterval(this.update, 20);
         this.animation = this.animation.bind(this);
         this.anim = setInterval(this.animation, 120);
+        this.generateObstacle = this.generateObstacle.bind(this);
+        this.anim = setInterval(this.generateObstacle, 5000);
     }
 
     preload() {
         this.background = this.app.loadImage('/images/fondo.jpg');
+        Logica.obstacle1 = this.app.loadImage('/images/objeto1.png');
+
         for (let i = 1; i < 11; i++) {
             this.runing.push(this.app.loadImage('/images/correr' + i + '.png'))
         }
@@ -43,6 +50,10 @@ class Logica {
     show() {
         this.app.image(this.background, this.mapX2, this.app.height / 2);
         this.app.image(this.background, this.mapX, this.app.height / 2);
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].draw();
+            
+        }
         if (this.isRunnig) {
             this.app.image(this.runing[this.rIndex], 100, this.posY);
         }
@@ -123,5 +134,9 @@ class Logica {
             this.isKicking =false;
             this.isRunnig = true;
         }
+    }
+
+    generateObstacle(){
+        this.obstacles.push(new Obstacle(this.app));
     }
 }
