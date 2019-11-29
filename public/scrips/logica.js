@@ -43,7 +43,7 @@ class Logica {
         for (let i = 1; i < 10; i++) {
             this.hJumping.push(this.app.loadImage('/images/alto' + i + '.png'))
         }
-        for (let i = 1; i < 10; i++) {
+        for (let i = 1; i < 6; i++) {
             this.kicking.push(this.app.loadImage('/images/patada' + i + '.png'))
         }
     }
@@ -51,11 +51,11 @@ class Logica {
     show() {
         switch (this.screenNumber) {
             case 0:
-                this.app.image(this.startMenu, this.app.width/2, this.app.height / 2,600,600);
+                this.app.image(this.startMenu, this.app.width / 2, this.app.height / 2, 600, 600);
                 break;
 
             case 1:
-                this.app.image(this.instructions, this.app.width/2, this.app.height / 2,600,600);
+                this.app.image(this.instructions, this.app.width / 2, this.app.height / 2, 600, 600);
                 break;
 
             case 2:
@@ -63,7 +63,7 @@ class Logica {
                 this.app.image(this.background, this.mapX, this.app.height / 2);
                 for (let i = 0; i < this.obstacles.length; i++) {
                     this.obstacles[i].draw();
-        
+
                 }
                 if (this.isRunnig) {
                     this.app.image(this.runing[this.rIndex], 100, this.posY);
@@ -80,7 +80,7 @@ class Logica {
                 break;
 
         }
-        
+
     }
 
     keyReleased() {
@@ -89,7 +89,7 @@ class Logica {
                 this.isJumping = true;
                 this.isRunnig = false;
                 this.rIndex = 0;
-                this.velJumping = -9;
+                this.velJumping = -8;
             }
             if (this.app.key == 'A' || this.app.key == 'a') {
                 this.isHJumping = true;
@@ -145,7 +145,7 @@ class Logica {
         if (this.isHJumping && this.rIndex >= 8) {
             this.rIndex = 8;
         }
-        if (this.isKicking && this.rIndex >= 9) {
+        if (this.isKicking && this.rIndex >= 5) {
             this.rIndex = 0;
             this.isKicking = false;
             this.isRunnig = true;
@@ -156,7 +156,7 @@ class Logica {
         for (let i = 0; i < this.obstacles.length; i++) {
             const o = this.obstacles[i];
             if (o.tipo == 3 && this.isKicking) {
-                if (this.app.dist(200, this.posY + 30, o.posX, o.posY) < 45) {
+                if (this.app.dist(180, this.posY + 30, o.posX, o.posY) < 45) {
                     o.stopAsync();
                     this.obstacles.splice(i, 1);
                     return;
@@ -178,42 +178,68 @@ class Logica {
 
         for (let i = 0; i < this.obstacles.length; i++) {
             const o = this.obstacles[i];
-            if (o.tipo == 1 || o.tipo == 3) {
-                if (this.app.dist(190, this.posY + 35, o.posX, o.posY) < 38) {
-                    console.log("pierdo");
+            if (o.tipo == 1) {
+                if (this.app.dist(180, this.posY + 35, o.posX, o.posY) < 38) {
+                    this.reset();
+                }
+            }
+            if (o.tipo == 3) {
+                if (this.app.dist(100, this.posY + 35, o.posX, o.posY) < 38) {
+                    this.reset();
                 }
             }
             if (o.tipo == 2) {
-                if (this.app.dist(150, this.posY + 50, o.posX, o.posY) < 20) {
-                    console.log("pierdo");
+                if (this.app.dist(100, this.posY + 50, o.posX, o.posY) < 20) {
+                   this.reset();
                 }
             }
         }
     }
 
-    mPressed(){
-        console.log(this.app.mouseX);
-        console.log(this.app.mouseY);
+    mPressed() {
         switch (this.screenNumber) {
             case 0:
                 if (this.app.mouseX > 159 && this.app.mouseX < 441 && this.app.mouseY > 508 && this.app.mouseY < 560) {
-                    this.screenNumber ++;
+                    this.screenNumber++;
                 }
                 break;
-        
-                case 1:
-                    this.screenNumber ++;
-                    this.update = this.update.bind(this);
-                    this.upd = setInterval(this.update, 20);
-                    this.animation = this.animation.bind(this);
-                    this.anim = setInterval(this.animation, 50);
-                    this.generateObstacle = this.generateObstacle.bind(this);
-                    this.anim = setInterval(this.generateObstacle, 5000);
+
+            case 1:
+                this.screenNumber++;
+                this.update = this.update.bind(this);
+                this.upd = setInterval(this.update, 20);
+                this.animation = this.animation.bind(this);
+                this.anim = setInterval(this.animation, 80);
+                this.generateObstacle = this.generateObstacle.bind(this);
+                this.generate = setInterval(this.generateObstacle, 3000);
                 break;
         }
     }
 
     generateObstacle() {
         this.obstacles.push(new Obstacle(this.app));
+    }
+
+    reset(){
+        clearInterval(this.upd);
+        clearInterval(this.anim);
+        clearInterval(this.generate);
+        for (let j = 0; j < this.obstacles.length; j++) {
+            this.obstacles[j].stopAsync();
+
+        }
+        this.screenNumber = 0;
+        this.mapX = 2592.5;
+        this.mapX2 = 2592.5 + 5185;
+        this.velMap = 7;
+        this.rIndex = 0;
+        this.posY = 390;
+        this.gravity = 0.5;
+        this.velJumping = 0;
+        this.isRunnig = true;
+        this.isJumping = false;
+        this.isHJumping = false;
+        this.isKicking = false;
+        this.obstacles = [];
     }
 }
