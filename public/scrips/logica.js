@@ -146,7 +146,7 @@ class Logica {
         for (let i = 0; i < this.obstacles.length; i++) {
             const o = this.obstacles[i];
             if (o.tipo == 3 && this.isKicking) {
-            if (this.app.dist(200,this.posY+30,o.posX,o.posY)<50) {
+            if (this.app.dist(200,this.posY+30,o.posX,o.posY)<45) {
                 o.stopAsync();
                 this.obstacles.splice(i,1);
             }
@@ -157,11 +157,15 @@ class Logica {
 
         for (let i = 0; i < this.obstacles.length; i++) {
             const o = this.obstacles[i];
-            if (o.tipo == 1 || o.tipo == 2) {
-                if (this.app.dist(200,this.posY+30,o.posX,o.posY)<38) {
+            if (o.tipo == 1 || o.tipo == 3) {
+                if (this.app.dist(200,this.posY+35,o.posX,o.posY)<38) {
                     console.log("pierdo");            
             }
-                
+            }
+            if (o.tipo == 2) {
+                if (this.app.dist(150,this.posY+50,o.posX,o.posY)<20) {
+                    console.log("pierdo");            
+            }
             }
         }
     }
