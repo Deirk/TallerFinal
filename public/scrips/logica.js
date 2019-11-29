@@ -2,6 +2,7 @@ class Logica {
 
     static obstacle1;
     static obstacle2;
+    static obstacle3;
 
     constructor(app) {
         this.app = app;
@@ -10,7 +11,7 @@ class Logica {
         this.mapX2 = 2592.5 + 5185;
         this.velMap = 7;
         this.rIndex = 0;
-        this.posY = 400;
+        this.posY = 390;
         this.gravity = 0.5;
         this.velJumping = 0;
         this.runing = [];
@@ -25,7 +26,7 @@ class Logica {
         this.update = this.update.bind(this);
         this.upd = setInterval(this.update, 20);
         this.animation = this.animation.bind(this);
-        this.anim = setInterval(this.animation, 120);
+        this.anim = setInterval(this.animation, 50);
         this.generateObstacle = this.generateObstacle.bind(this);
         this.anim = setInterval(this.generateObstacle, 5000);
     }
@@ -34,6 +35,7 @@ class Logica {
         this.background = this.app.loadImage('/images/fondo.jpg');
         Logica.obstacle1 = this.app.loadImage('/images/objeto1.png');
         Logica.obstacle2 = this.app.loadImage('/images/objeto2.png');
+        Logica.obstacle3 = this.app.loadImage('/images/objeto3.png');
 
 
         for (let i = 1; i < 11; i++) {
@@ -108,17 +110,18 @@ class Logica {
             this.velJumping += this.gravity;
         }
 
-        if (this.posY >= 400 && this.isJumping) {
+        if (this.posY >= 390 && this.isJumping) {
             this.isJumping = false;
             this.isRunnig = true;
             this.rIndex = 0;
         }
 
-        if (this.posY >= 400 && this.isHJumping) {
+        if (this.posY >= 390 && this.isHJumping) {
             this.isHJumping = false;
             this.isRunnig = true;
             this.rIndex = 0;
         }
+        this.validate();
     }
 
     animation() {
@@ -127,15 +130,39 @@ class Logica {
             this.rIndex = 0;
         }
         if (this.isJumping && this.rIndex >= 10) {
-            this.rIndex = 10;
-        }
-        if (this.isHJumping && this.rIndex >= 9) {
             this.rIndex = 9;
+        }
+        if (this.isHJumping && this.rIndex >= 8) {
+            this.rIndex = 8;
         }
         if (this.isKicking && this.rIndex >= 9) {
-            this.rIndex = 9;
+            this.rIndex = 0;
             this.isKicking =false;
             this.isRunnig = true;
+        }
+    }
+
+    validate(){
+        for (let i = 0; i < this.obstacles.length; i++) {
+            const o = this.obstacles[i];
+            if (o.tipo == 3 && this.isKicking) {
+            if (this.app.dist(200,this.posY+30,o.posX,o.posY)<50) {
+                o.stopAsync();
+                this.obstacles.splice(i,1);
+            }
+            }
+        }
+        
+
+
+        for (let i = 0; i < this.obstacles.length; i++) {
+            const o = this.obstacles[i];
+            if (o.tipo == 1 || o.tipo == 2) {
+                if (this.app.dist(200,this.posY+30,o.posX,o.posY)<38) {
+                    console.log("pierdo");            
+            }
+                
+            }
         }
     }
 
