@@ -820,18 +820,6 @@ body {
   }
 }
 
-/* GAME */
-.p5Canvas {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 5vw;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin: auto;
-}
-
 /* FOOTER */
 .footer {
   background: rgba(0, 0, 0, 0.5);
@@ -1372,5 +1360,21 @@ body {
       justify-content: space-around;
   margin-left: 30%;
   margin-right: 30%;
+}
+
+.header__bag {
+  font-size: 20pt;
+  color: #FFFFFF;
+  border-radius: 2px;
+}
+
+.product__bag p {
+  width: 20%;
+  padding: 10px;
+  margin-left: 40%;
+  margin-right: 40%;
+  border-radius: 23px;
+  background: #ff302a;
+  color: white;
 }
 /*# sourceMappingURL=main.css.map */
