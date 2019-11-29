@@ -11,14 +11,17 @@ class Logica {
         this.gravity = 0.5;
         this.velJumping = 0;
         this.runing = [];
+        this.kicking = [];
         this.jumping = [];
         this.hJumping = [];
         this.isRunnig = true;
         this.isJumping = false;
+        this.isHJumping = false;
+        this.isKicking = false;
         this.update = this.update.bind(this);
         this.upd = setInterval(this.update, 20);
         this.animation = this.animation.bind(this);
-        this.anim = setInterval(this.animation, 100);
+        this.anim = setInterval(this.animation, 120);
     }
 
     preload() {
@@ -29,8 +32,11 @@ class Logica {
         for (let i = 1; i < 11; i++) {
             this.jumping.push(this.app.loadImage('/images/salto' + i + '.png'))
         }
-        for (let i = 1; i < 11; i++) {
-            this.hJumping.push(this.app.loadImage('/images/salto' + i + '.png'))
+        for (let i = 1; i < 10; i++) {
+            this.hJumping.push(this.app.loadImage('/images/alto' + i + '.png'))
+        }
+        for (let i = 1; i < 10; i++) {
+            this.kicking.push(this.app.loadImage('/images/patada' + i + '.png'))
         }
     }
 
@@ -43,14 +49,33 @@ class Logica {
         if (this.isJumping) {
             this.app.image(this.jumping[this.rIndex], 100, this.posY);
         }
+        if (this.isHJumping) {
+            this.app.image(this.hJumping[this.rIndex], 100, this.posY);
+        }
+        if (this.isKicking) {
+            this.app.image(this.kicking[this.rIndex], 100, this.posY);
+        }
     }
 
     keyReleased() {
-        if (this.isJumping == false && this.app.key == 'S' || this.app.key == 's') {
-            this.isJumping = true;
-            this.isRunnig = false;
-            this.rIndex = 0;
-            this.velJumping = -8;
+        if (this.isRunnig == true) {
+            if (this.app.key == 'S' || this.app.key == 's') {
+                this.isJumping = true;
+                this.isRunnig = false;
+                this.rIndex = 0;
+                this.velJumping = -8;
+            }
+            if (this.app.key == 'A' || this.app.key == 'a') {
+                this.isHJumping = true;
+                this.isRunnig = false;
+                this.rIndex = 0;
+                this.velJumping = -12;
+            }
+            if (this.app.key == 'D' || this.app.key == 'd') {
+                this.isKicking = true;
+                this.isRunnig = false;
+                this.rIndex = 0;
+            }
         }
     }
 
@@ -64,13 +89,19 @@ class Logica {
             this.mapX2 = this.mapX + 5185;
         }
 
-        if (this.isJumping) {
+        if (this.isJumping || this.isHJumping) {
             this.posY += this.velJumping;
             this.velJumping += this.gravity;
         }
 
         if (this.posY >= 400 && this.isJumping) {
             this.isJumping = false;
+            this.isRunnig = true;
+            this.rIndex = 0;
+        }
+
+        if (this.posY >= 400 && this.isHJumping) {
+            this.isHJumping = false;
             this.isRunnig = true;
             this.rIndex = 0;
         }
@@ -82,7 +113,15 @@ class Logica {
             this.rIndex = 0;
         }
         if (this.isJumping && this.rIndex >= 10) {
-            this.rIndex = 0;
+            this.rIndex = 10;
+        }
+        if (this.isHJumping && this.rIndex >= 9) {
+            this.rIndex = 9;
+        }
+        if (this.isKicking && this.rIndex >= 9) {
+            this.rIndex = 9;
+            this.isKicking =false;
+            this.isRunnig = true;
         }
     }
 }
