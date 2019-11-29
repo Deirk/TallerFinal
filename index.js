@@ -36,21 +36,22 @@ const client = new MongoClient(url, { useNewUrlParser: true });
 
 //Para usar Mongo: conectar (Paso 2)
 
-  client.connect(function(err) {
-    // asegurarnos de que no existe un error
-    assert.equal(null, err);
+MongoClient.connect(`mongodb+srv://cluster0-szzo5.mongodb.net/store?retryWrites=true&w=majority`,
 
-    console.log('conexión');
+{
+  auth: {
+    user: 'majo_derik',
+    password: '03132000'
 
-    // conectamos el cliente a la base de datos que necesitamos
-    const db = client.db(dbName);
+  }
+},
 
-    createRoutes(app, db);
+function (err, client) {
+  if (err) throw err;
+  const db = client.db(dbName);
 
+  createRoutes(app, db);
 
-// inicar servidor en el puerto definido anteriormente
-app.listen(3000, () => {
-    console.log("Servidor iniciado en el puerto 3000");
-});
-
-});
+  //Iniciar servidor
+  app.listen(process.env.PORT || 3000);}
+);
