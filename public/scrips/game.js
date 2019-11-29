@@ -20,7 +20,7 @@ new p5(function (app) {
     }
 
     app.mousePressed = function () {
-       // log.mPressed();
+       log.mPressed();
     }
 
     app.keyReleased = function () {

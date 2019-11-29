@@ -23,16 +23,12 @@ class Logica {
         this.isJumping = false;
         this.isHJumping = false;
         this.isKicking = false;
-        this.update = this.update.bind(this);
-        this.upd = setInterval(this.update, 20);
-        this.animation = this.animation.bind(this);
-        this.anim = setInterval(this.animation, 50);
-        this.generateObstacle = this.generateObstacle.bind(this);
-        this.anim = setInterval(this.generateObstacle, 5000);
     }
 
     preload() {
         this.background = this.app.loadImage('/images/fondo.jpg');
+        this.startMenu = this.app.loadImage('/images/inicio.jpg');
+        this.instructions = this.app.loadImage('/images/instrucciones.jpg');
         Logica.obstacle1 = this.app.loadImage('/images/objeto1.png');
         Logica.obstacle2 = this.app.loadImage('/images/objeto2.png');
         Logica.obstacle3 = this.app.loadImage('/images/objeto3.png');
@@ -53,24 +49,38 @@ class Logica {
     }
 
     show() {
-        this.app.image(this.background, this.mapX2, this.app.height / 2);
-        this.app.image(this.background, this.mapX, this.app.height / 2);
-        for (let i = 0; i < this.obstacles.length; i++) {
-            this.obstacles[i].draw();
-            
+        switch (this.screenNumber) {
+            case 0:
+                this.app.image(this.startMenu, this.app.width/2, this.app.height / 2,600,600);
+                break;
+
+            case 1:
+                this.app.image(this.instructions, this.app.width/2, this.app.height / 2,600,600);
+                break;
+
+            case 2:
+                this.app.image(this.background, this.mapX2, this.app.height / 2);
+                this.app.image(this.background, this.mapX, this.app.height / 2);
+                for (let i = 0; i < this.obstacles.length; i++) {
+                    this.obstacles[i].draw();
+        
+                }
+                if (this.isRunnig) {
+                    this.app.image(this.runing[this.rIndex], 100, this.posY);
+                }
+                if (this.isJumping) {
+                    this.app.image(this.jumping[this.rIndex], 100, this.posY);
+                }
+                if (this.isHJumping) {
+                    this.app.image(this.hJumping[this.rIndex], 100, this.posY);
+                }
+                if (this.isKicking) {
+                    this.app.image(this.kicking[this.rIndex], 100, this.posY);
+                }
+                break;
+
         }
-        if (this.isRunnig) {
-            this.app.image(this.runing[this.rIndex], 100, this.posY);
-        }
-        if (this.isJumping) {
-            this.app.image(this.jumping[this.rIndex], 100, this.posY);
-        }
-        if (this.isHJumping) {
-            this.app.image(this.hJumping[this.rIndex], 100, this.posY);
-        }
-        if (this.isKicking) {
-            this.app.image(this.kicking[this.rIndex], 100, this.posY);
-        }
+        
     }
 
     keyReleased() {
@@ -137,40 +147,73 @@ class Logica {
         }
         if (this.isKicking && this.rIndex >= 9) {
             this.rIndex = 0;
-            this.isKicking =false;
+            this.isKicking = false;
             this.isRunnig = true;
         }
     }
 
-    validate(){
+    validate() {
         for (let i = 0; i < this.obstacles.length; i++) {
             const o = this.obstacles[i];
             if (o.tipo == 3 && this.isKicking) {
-            if (this.app.dist(200,this.posY+30,o.posX,o.posY)<45) {
-                o.stopAsync();
-                this.obstacles.splice(i,1);
-            }
+                if (this.app.dist(200, this.posY + 30, o.posX, o.posY) < 45) {
+                    o.stopAsync();
+                    this.obstacles.splice(i, 1);
+                    return;
+                }
             }
         }
-        
+
+        for (let i = 0; i < this.obstacles.length; i++) {
+            const o = this.obstacles[i];
+
+            if (o.posX <= -100) {
+                o.stopAsync();
+                this.obstacles.splice(i, 1);
+            }
+
+        }
+
 
 
         for (let i = 0; i < this.obstacles.length; i++) {
             const o = this.obstacles[i];
             if (o.tipo == 1 || o.tipo == 3) {
-                if (this.app.dist(200,this.posY+35,o.posX,o.posY)<38) {
-                    console.log("pierdo");            
-            }
+                if (this.app.dist(190, this.posY + 35, o.posX, o.posY) < 38) {
+                    console.log("pierdo");
+                }
             }
             if (o.tipo == 2) {
-                if (this.app.dist(150,this.posY+50,o.posX,o.posY)<20) {
-                    console.log("pierdo");            
-            }
+                if (this.app.dist(150, this.posY + 50, o.posX, o.posY) < 20) {
+                    console.log("pierdo");
+                }
             }
         }
     }
 
-    generateObstacle(){
+    mPressed(){
+        console.log(this.app.mouseX);
+        console.log(this.app.mouseY);
+        switch (this.screenNumber) {
+            case 0:
+                if (this.app.mouseX > 159 && this.app.mouseX < 441 && this.app.mouseY > 508 && this.app.mouseY < 560) {
+                    this.screenNumber ++;
+                }
+                break;
+        
+                case 1:
+                    this.screenNumber ++;
+                    this.update = this.update.bind(this);
+                    this.upd = setInterval(this.update, 20);
+                    this.animation = this.animation.bind(this);
+                    this.anim = setInterval(this.animation, 50);
+                    this.generateObstacle = this.generateObstacle.bind(this);
+                    this.anim = setInterval(this.generateObstacle, 5000);
+                break;
+        }
+    }
+
+    generateObstacle() {
         this.obstacles.push(new Obstacle(this.app));
     }
 }
