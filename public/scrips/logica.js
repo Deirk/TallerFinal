@@ -161,6 +161,10 @@ class Logica {
                     this.obstacles.splice(i, 1);
                     return;
                 }
+            } else if (o.tipo == 3 && this.isJumping) {
+                if (this.app.dist(180, this.posY , o.posX, o.posY) < 80) {
+                    this.reset();
+                }
             }
         }
 
