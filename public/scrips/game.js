@@ -23,13 +23,8 @@ new p5(function (app) {
        // log.mPressed();
     }
 
-    app.keyPressed = function () {
-        //log.keyPressed();
-    }
-
-
     app.keyReleased = function () {
-       // log.keyReleased();
+       log.keyReleased();
     }
 
 });
